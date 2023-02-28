@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateMovieRequest extends FormRequest
+class SearchMovieRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +24,7 @@ class UpdateMovieRequest extends FormRequest
     public function rules()
     {
         return [
-            // ignoreで自分のidの時は重複しててもOKにする
-            'title' => ['required', Rule::unique('movies')->ignore($this->id)],
+            'title' => ['required', 'unique:movies'],
             'image_url' => ['required', 'url'],
             'published_year' => ['required', 'gte:1900'],
             'description' => ['required'],
