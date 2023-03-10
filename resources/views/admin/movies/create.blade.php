@@ -49,8 +49,19 @@
 			<textarea name="description" required></textarea>
 		</div>
 
+		<div>
+			<label for="form-genre">ジャンル</label>
+			<input type="text" name="genre" id="form-genre">
+		</div>
+
 		<button type="submit">登録</button>
 	</form>
 	<a href="{{ route('admin.movies.index') }}">{{ __('一覧へ戻る') }}</a>
+
+	{{-- テスト用 --}}
+		@foreach ($genres as $genre)
+			<li>ジャンルid: {{ $genre->id}}</li>
+			<li>ジャンル名: {{ $genre->name}}</li>
+    @endforeach
 </body>
 </html>

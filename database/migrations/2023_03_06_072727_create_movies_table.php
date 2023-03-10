@@ -15,7 +15,8 @@ class CreateMoviesTable extends Migration
     {
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
-            $table->text('title')->comment('タイトル');
+            $table->string('title', 255)->comment('タイトル')->unique();
+            $table->foreignId('genre_id')->constrained('genres');
             $table->timestamps();
         });
     }

@@ -15,6 +15,7 @@
         <li>公開年: {{ $movie->published_year }}</li>
         <li>上映中？: {{ $movie->is_showing? '上映中' : '上映予定' }}</li>
         <li>概要: {{ $movie->description}}</li>
+        <li>ジャンルid: {{ $movie->genre_id}}</li>
         <form method="POST" action="{{route('admin.movies.destroy',['id'=>$movie->id])}}">
           @csrf
 					@method('delete')

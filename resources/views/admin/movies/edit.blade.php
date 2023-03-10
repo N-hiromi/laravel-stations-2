@@ -52,6 +52,11 @@
 			<textarea name="description" required>{{ $movie->description }}</textarea>
 		</div>
 
+		<div>
+			<label for="form-genre">ジャンル</label>
+			<input type="text" name="genre" id="form-genre" value="{{ $movie->genre->name }}">
+		</div>
+
 		<button type="submit">登録</button>
 	</form>
 	<a href="{{ route('admin.movies.index') }}">{{ __('一覧へ戻る') }}</a>

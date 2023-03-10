@@ -12,24 +12,18 @@ class MovieController extends Controller{
 	public function index(Request $request)
 	{
 		$keyword = $request->input('keyword');
-		$onAir = $request->input('onAir');
+		$is_showing = $request->input('is_showing');
 		$query = Movie::query();
-
+		if($is_showing != "2" && $is_showing != ""){
+			$query->where('is_showing', (int)$is_showing);
+		}
 		if(!empty($keyword)){
 			if(!empty($keyword)){
 				$query->where('title', 'LIKE', "%{$keyword}")
 				->orwhere('description', 'LIKE', "%{$keyword}");
 			}
 		}
-		if(!empty($onAir)){
-			$query->where('is_showing', $onAir);
-			// if($onAir = 0){
-			// 	$query->where('is_showing', 0);
-			// }else{
-			// 	$query->where('is_showing', 1);
-			// }
-		}
-		$movies = $query->get();
-		return view('movies.index', compact('movies', 'keyword', 'onAir'));
+		$movies = $query->paginate(20)->withQueryString();
+		return view('movies.index', compact('movies', 'keyword', 'is_showing'));
 	}
 }
